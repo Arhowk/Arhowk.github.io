@@ -33,17 +33,56 @@
     var editor = ace.edit("editor");
     var editor2 = ace.edit("editor2");
     editor2.setReadOnly(true);
+    
+    var isComment = function(){
+        
+    }
     editor.getSession().on('change', function() {   
         var textToProcess = editor.getValue();
         var lines = textToProcess.split('\n');
+        var hasErrors = false;
+        var text = "";
+        var waitingOnBracket = false;
+        var bracketry = 0;
+        var prevLineNo = 1;
         for(var i = 0;i < lines.length;i++){
-            if(lines[i].split('"').length % 2 != 1){
-                editor2.setValue("Incorrect Number of Quotations on line " + (i+1) + " : " + lines[i])   
-                return;
+            if(!(isComment(lines[i]) || isWhitespace(lines[i]))){
+                //Its an actual line of KV code, write accordingly.
+                
+                //Prep the line for input
+                var line = goodLine(lines[i])
+                
+                //If the previous line only had two quotes, ensure that this line is a bracket
+                if(line == "{" || line == "}"){
+                    if(waitingOnBracket && line == "}"){
+                        text.append("Block missing start!" + (prevLineNo) + " : " + lines[i])   
+                    }
+                    if(line == "{"){
+                        bracketry++;
+                    }else{
+                        bracketry--;
+                        
+                        if(bracketry < 0 || (bracketry == 0 && i+1 != lines.length)){
+                            text.append("File terminated too early on line " + (i+1) + " : " + lines[i])   
+                        }
+                    }
+                }else if(waitingOnBracket){
+                    //We shouldve had a bracket! Fuck him.
+                        text.append("Block missing start!" + (i+1) + " : " + lines[i])   
+                }else{
+                    //First, ensure every line has an even number of quotation marks
+                    if(lines[i].split('"').length % 2 != 1){
+                        text.append("Incorrect Number of Quotations on line " + (i+1) + " : " + lines[i])   
+                        return;
+                    }
+                }
+                prevLineNo = i+1;
             }
             //code here using lines[i] which will give you each line
         }   
-        editor2.setValue(editor.getValue());
+        if(text != ""){
+            editor2.setValue(editor.getValue());
+        }
     });
 </script>
 </body>
