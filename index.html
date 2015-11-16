@@ -104,7 +104,6 @@
                             var foundQuotationBug = false
                             for(var i2 = 0; i2 < split.length; i2++){
                                 if(split[i2].trim().length > 0 && i2 % 2 == 0){
-                                    text = text + "debug " + i2 + " " + split[i2] + " " + lines[i] + " " + i2 % 2
                                     text = text + "\nText outside of quotations on line " + (i+1) + " : " + lines[i]
                                     foundQuotationBug = true;
                                     break;
