@@ -82,9 +82,6 @@
                             bracketry = 0;
                         }
                     }
-                }else if(waitingOnBracket){
-                    //We shouldve had a bracket! Fuck him.
-                        text = text + "\nBlock missing start on line" + (i+1) + " : " + lines[i]
                 }else{
                     var split = lines[i].split('"')
                     if(split.length == 3){
