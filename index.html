@@ -45,6 +45,9 @@
     var goodLine = function(str){
         return str.trim();
     }
+    
+    editor.setShowPrintMargin(false);
+    editor2.setShowPrintMargin(false);
     editor.getSession().on('change', function() {   
         var textToProcess = editor.getValue();
         var lines = textToProcess.split('\n');
