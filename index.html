@@ -83,6 +83,7 @@
                 }else{
                     //First, ensure every line has an even number of quotation marks
                     if(lines[i].split('"').length % 2 != 1){
+                        console.log("Illegal Number o quotes");
                         text.concat("Incorrect Number of Quotations on line " + (i+1) + " : " + lines[i])   
                     }
                 }
