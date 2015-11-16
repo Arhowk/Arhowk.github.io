@@ -82,11 +82,21 @@
                     //We shouldve had a bracket! Fuck him.
                         text = text + "\nBlock missing start!" + (i+1) + " : " + lines[i]
                 }else{
+                    if(lines[i].split('"').length == 3){
+                        if(waitingForBracket){
+                            waitingForBracket = false;   
+                        }else{
+                            waitingForBracket = true;   
+                        }
+                    }else if(waitingForBracket){
+                        text = text + "Expected open bracket, got new K/V on line " + (i+1) + " : " + lines[i]
+                    }
                     //First, ensure every line has an even number of quotation marks
                     if(lines[i].split('"').length % 2 != 1){
                         console.log("Illegal Number o quotes");
                         text = text + "\nIncorrect Number of Quotations on line " + (i+1) + " : " + lines[i]  
                     }
+                    
                 }
                 prevLineNo = i+1;
             }
