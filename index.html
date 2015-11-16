@@ -112,7 +112,9 @@
                             //Throw some parsing error
                             if(split.length > 5 && !foundQuotationBug){
                                 text = text + "\nInterpreter cannot parse more than one KV per line on line " + (i+1) + " : " + lines[i]
-                            }        
+                            }else if(bracketry == 0 && i != 0){
+                                text = text + "\nText outside of root bracket on line " + (i+1) + " : " + lines[i];
+                            }
                         }
                     }
                     
@@ -124,7 +126,6 @@
         if(bracketry != 0){
             text = text + "\nUnexpected: End of File (missing " + bracketry + "closing  bracket" + (bracketry == 1 ? "" : "s") + ")";   
         }
-        console.log("Text: " + text);
         if(text == ""){
             editor2.setValue(editor.getValue());
         }else{
