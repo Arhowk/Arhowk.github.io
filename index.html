@@ -84,7 +84,6 @@
                     //First, ensure every line has an even number of quotation marks
                     if(lines[i].split('"').length % 2 != 1){
                         text.concat("Incorrect Number of Quotations on line " + (i+1) + " : " + lines[i])   
-                        return;
                     }
                 }
                 prevLineNo = i+1;
