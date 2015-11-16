@@ -75,6 +75,7 @@
                         
                         if(bracketry < 0 || (bracketry == 0 && i+1 != lines.length)){
                             text = text + "\nFile terminated too early on line " + (i+1) + " : " + lines[i]   
+                            bracketry = 0;
                         }
                     }
                 }else if(waitingOnBracket){
@@ -91,6 +92,9 @@
             }
             //code here using lines[i] which will give you each line
         }   
+        if(bracketry != 0){
+            text = text + "\nUnexpected: End of File (missing " + bracketry + "closing  bracket" + (bracketry == 1 ? "" : "s") + ")";   
+        }
         console.log("Text: " + text);
         if(text == ""){
             editor2.setValue(editor.getValue());
