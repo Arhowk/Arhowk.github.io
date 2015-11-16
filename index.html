@@ -95,14 +95,24 @@
                         }
                     }else if(waitingOnBracket){
                         text = text + "Expected open bracket, got new K/V on line " + (i+1) + " : " + lines[i]
-                    }
-                    //First, ensure every line has an even number of quotation marks
-                    if(split.length % 2 != 1){
-                        console.log("Illegal Number o quotes");
-                        text = text + "\nIncorrect Number of Quotations on line " + (i+1) + " : " + lines[i]  
-                    }
-                    if(split.length > 5){
-                        text = text + "\nInterpreter cannot parse more than one KV per line on line " + (i+1) + " : " + lines[i]
+                    }else{
+                        if(split.length % 2 != 1){
+                            console.log("Illegal Number o quotes");
+                            text = text + "\nIncorrect Number of Quotations on line " + (i+1) + " : " + lines[i]  
+                        }else{
+                            //Ensure all text is whtin quotations
+                            var foundQuotationBug = false
+                            for(var i2 = 0; i < split.length; i++){
+                                if(split[i2].trim.length > 0 && i % 2 == 0){
+                                    text = text + "\nText outside of quotations on line " + (i+1) + " : " + lines[i]
+                                    break;
+                                }
+                            }
+                            //Throw some parsing error
+                            if(split.length > 5 && !foundQuotationBug){
+                                text = text + "\nInterpreter cannot parse more than one KV per line on line " + (i+1) + " : " + lines[i]
+                            }        
+                        }
                     }
                     
                 }
