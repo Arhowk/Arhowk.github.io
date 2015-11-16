@@ -69,6 +69,10 @@
                         text = text + "\nBlock missing start!" + (prevLineNo) + " : " + lines[i]
                     }
                     if(line == "{"){
+                        if(!waitingOnBracket){
+                            text = text + "\nUnexpected: Open Bracket on line " + (i+1);
+                        }
+                        waitingOnBracket = false;
                         bracketry++;
                     }else{
                         bracketry--;
