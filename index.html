@@ -66,7 +66,7 @@
                 //If the previous line only had two quotes, ensure that this line is a bracket
                 if(line == "{" || line == "}"){
                     if(waitingOnBracket && line == "}"){
-                        text = text + "\nBlock missing start!" + (prevLineNo) + " : " + lines[i]
+                        text = text + "\nExpected open block, got close block on line " + (prevLineNo) + " : " + lines[i]
                     }
                     if(line == "{"){
                         if(!waitingOnBracket){
@@ -84,7 +84,7 @@
                     }
                 }else if(waitingOnBracket){
                     //We shouldve had a bracket! Fuck him.
-                        text = text + "\nBlock missing start!" + (i+1) + " : " + lines[i]
+                        text = text + "\nBlock missing start on line" + (i+1) + " : " + lines[i]
                 }else{
                     var split = lines[i].split('"')
                     if(split.length == 3){
@@ -124,7 +124,7 @@
             //code here using lines[i] which will give you each line
         }   
         if(bracketry != 0){
-            text = text + "\nUnexpected: End of File (missing " + bracketry + "closing  bracket" + (bracketry == 1 ? "" : "s") + ")";   
+            text = text + "\nUnexpected: End of File (missing " + bracketry + " closing bracket" + (bracketry == 1 ? "" : "s") + ")";   
         }
         if(text == ""){
             editor2.setValue(editor.getValue());
