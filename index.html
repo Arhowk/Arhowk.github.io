@@ -25,7 +25,7 @@
 </head>
 <body>
 
-<div id="editor">code2</div>
+<div id="editor">code3</div>
 <div id="editor2">Codle to the left will be compiled and placed here</div>
     
 <script src="/ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
@@ -33,7 +33,16 @@
     var editor = ace.edit("editor");
     var editor2 = ace.edit("editor2");
     editor2.setReadOnly(true);
-    editor.getSession().on('change', function() {
+    editor.getSession().on('change', function() {   
+        var textToProcess = editor.getValue();
+        var lines = textToProcess.split('\n');
+        for(var i = 0;i < lines.length;i++){
+            if(lines[i].split('"').length % 2 != 0){
+                editor2.setValue(lines[i])   
+                return;
+            }
+            //code here using lines[i] which will give you each line
+        }   
         editor2.setValue(editor.getValue());
     });
 </script>
