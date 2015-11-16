@@ -26,12 +26,13 @@
 <body>
 
 <div id="editor">code2</div>
-<div id="editor2"> more code</div>
+<div id="editor2">Codle to the left will be compiled and placed here</div>
     
 <script src="/ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
 <script>
     var editor = ace.edit("editor");
     var editor2 = ace.edit("editor2");
+    editor2.setEditable(false);
 </script>
 </body>
 </html>
