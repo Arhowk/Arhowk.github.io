@@ -5,7 +5,7 @@
 <style type="text/css" media="screen">
     #editor { 
         position: absolute;
-        top: 0;
+        top: 100;
         right: 0;
         bottom: 0;
         left: 0;
@@ -14,7 +14,7 @@
     }
     #editor2 { 
         position: absolute;
-        top: 0;
+        top: 100;
         right: 0;
         bottom: 0;
         left: 50%;
@@ -31,11 +31,7 @@
 <script src="/ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
 <script>
     var editor = ace.edit("editor");
-    editor.setTheme("ace/theme/monokai");
-    editor.getSession().setMode("ace/mode/javascript");
     var editor2 = ace.edit("editor2");
-    editor.setTheme("ace/theme/monokai");
-    editor.getSession().setMode("ace/mode/javascript");
 </script>
 </body>
 </html>
