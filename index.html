@@ -32,7 +32,10 @@
 <script>
     var editor = ace.edit("editor");
     var editor2 = ace.edit("editor2");
-    editor2.setEditable(false);
+    editor2.setReadOnly(true);
+    editor.getSession().on('change', function() {
+        editor2.setValue(editor.getValue());
+    });
 </script>
 </body>
 </html>
