@@ -88,7 +88,7 @@
                         bracketry--;
                         
                         if(bracketry < 0){
-                            text = text + "Too many close brackets on line " + (i+1);
+                            text = text + "\nToo many close brackets on line " + (i+1);
                         }
                         
                     }
@@ -101,7 +101,7 @@
                             waitingOnBracket = true;   
                         }
                     }else if(waitingOnBracket){
-                        text = text + "Expected open bracket, got new K/V on line " + (i+1) + " : " + line.trim()
+                        text = text + "\nExpected open bracket, got new K/V on line " + (i+1) + " : " + line.trim()
                     }else{
                         if(split.length % 2 != 1){
                             console.log("Illegal Number o quotes");
