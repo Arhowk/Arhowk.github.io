@@ -114,6 +114,7 @@
                             }
                             waitingOnBracket = true;
                         }
+                        text = text + "\ndebug " + split[2] + " " + split[2].trim().indexOf("{}") + " " + waitingOnBracket;
                     }else if(waitingOnBracket){
                         text = text + "\nExpected open bracket, got new K/V on line " + (i+1) + " : " + line.trim()
                     }else{
