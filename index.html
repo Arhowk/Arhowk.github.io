@@ -126,7 +126,7 @@
         if(text == ""){
             editor2.setValue(editor.getValue());
         }else{
-            editor2.setValue(text);
+            editor2.setValue(text.trim());
         }
         editor2.selection.moveTo(0,0);
     });
