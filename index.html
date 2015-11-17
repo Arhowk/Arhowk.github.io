@@ -68,10 +68,10 @@
                 //Prep the line for input
                 var line = goodLine(lines[i])
                 
-                if((bracketry < 0 || (bracketry == 0 && i+1 != lines.length && i != 0)) && line != "{"){
-                    text = text + "\nFile terminated too early on line " + (i+1) + " : " + line.trim()   
-                    bracketry = 0;
-                }
+               // if((bracketry < 0 || (bracketry == 0 && i+1 != lines.length && i != 0)) && line != "{"){
+                //    text = text + "\nFile terminated too early on line " + (i+1) + " : " + line.trim()   
+                //    bracketry = 0;
+                //}
                 
                 //If the previous line only had two quotes, ensure that this line is a bracket
                 if(line == "{" || line == "}"){
