@@ -74,7 +74,11 @@
                 //}
                 
                 //If the previous line only had two quotes, ensure that this line is a bracket
-                if(line == "{" || line == "}"){
+                if(line == "{}"){
+                    if(waitingOnBracket){
+                        waitingOnBracket = false;   
+                    }
+                }else if(line == "{" || line == "}"){
                     if(waitingOnBracket && line == "}"){
                         text = text + "\nExpected open block, got close block for line " + (prevLineNo) + " at line " + (i+1) + " : " + line.trim()
                     }
@@ -104,20 +108,23 @@
                         text = text + "\nExpected open bracket, got new K/V on line " + (i+1) + " : " + line.trim()
                     }else{
                         if(split.length % 2 != 1){
-                            console.log("Illegal Number o quotes");
                             text = text + "\nIncorrect Number of Quotations on line " + (i+1) + " : " + line.trim()
                         }else{
                             //Ensure all text is whtin quotations
                             var foundQuotationBug = false
+                            var hasBrackets = false;
                             for(var i2 = 0; i2 < split.length; i2++){
-                                if(split[i2].trim().length > 0 && i2 % 2 == 0){
+                                if(split[i2].trim().length > 0 && i2 % 2 == 0 && split[i2].trim() != "{}")){
                                     text = text + "\nText outside of quotations on line " + (i+1) + " : " + line.trim()
                                     foundQuotationBug = true;
                                     break;
+                                }else if(split[i2].trim() == "{}"){
+                                    hasBrackets = true;
                                 }
                             }
-                            //Throw some parsing error
-                            if(split.length > 5 && !foundQuotationBug){
+                            if(hasBrackets && split.length != 3){
+                                 text = text + "\nIncorrect Number of Quotations on line " + (i+1) + " : " + line.trim()
+                            }else if(split.length > 5 && !foundQuotationBug){
                                 text = text + "\nInterpreter cannot parse more than one KV per line on line " + (i+1) + " : " + line.trim()
                             }else if(bracketry == 0 && i != 0){
                                 text = text + "\nText outside of root bracket on line " + (i+1) + " : " + line.trim();
