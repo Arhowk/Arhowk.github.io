@@ -69,7 +69,6 @@
                 var line = goodLine(lines[i])
                 
                 if((bracketry < 0 || (bracketry == 0 && i+1 != lines.length && i != 0)) && line != "{"){
-                    text = text + "\ndebug " + bracketry + " " + (i+1) + " " + lines.length 
                     text = text + "\nFile terminated too early on line " + (i+1) + " : " + line.trim()   
                     bracketry = 0;
                 }
