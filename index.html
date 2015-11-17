@@ -100,9 +100,19 @@
                     var split = line.split('"')
                     if(split.length == 3){
                         if(waitingOnBracket){
-                            waitingOnBracket = false;   
-                        }else{
-                            waitingOnBracket = true;   
+                            if(split[2].trim().indexOf("{}") == -1){
+                                if(split[0].trim().length != 0 || split[2].trim().length != 0){
+                                    text = text + "\nText outside of quotations on line " + (i+1) + " : " + line.trim()
+                                }
+                                waitingOnBracket = false;   
+                            }else{
+                                text = text + "\nExpected {, got K/V block on line " + (i+1) + " : " + line
+                            }
+                        }else if(split[2].trim().indexOf("{}") != -1){
+                            if(split[0].trim().length != 0 || split[2].trim().length != 0){
+                                text = text + "\nText outside of quotations on line " + (i+1) + " : " + line.trim()
+                            }
+                            waitingOnBracket = true;
                         }
                     }else if(waitingOnBracket){
                         text = text + "\nExpected open bracket, got new K/V on line " + (i+1) + " : " + line.trim()
