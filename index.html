@@ -100,7 +100,7 @@
                     var split = line.split('"')
                     if(split.length == 3){
                         if(waitingOnBracket){
-                            text = text + "\ndebug2 " + line 
+                            //text = text + "\ndebug2 " + line 
                             if(split[2].trim().indexOf("{}") == -1){
                                 if(split[0].trim().length != 0 || split[2].trim().length != 0){
                                     text = text + "\nText outside of quotations on line " + (i+1) + " : " + line.trim()
@@ -109,14 +109,14 @@
                             }else{
                                 text = text + "\nExpected {, got K/V block on line " + (i+1) + " : " + line
                             }
-                        }else if(split[2].trim().indexOf("{}") != -1){
-                            text = text + "\ndebug3 " + line
+                        }else if(split[2].trim().indexOf("{}") == -1){
+                           //text = text + "\ndebug3 " + line
                             if(split[0].trim().length != 0 || split[2].trim().length != 0){
                                 text = text + "\nText outside of quotations on line " + (i+1) + " : " + line.trim()
                             }
                             waitingOnBracket = true;
                         }
-                        text = text + "\ndebug " + split[2] + " " + split[2].trim().indexOf("{}") + " " + waitingOnBracket;
+                       // text = text + "\ndebug " + split[2] + " " + split[2].trim().indexOf("{}") + " " + waitingOnBracket;
                     }else if(waitingOnBracket){
                         text = text + "\nExpected open bracket, got new K/V on line " + (i+1) + " : " + line.trim()
                     }else{
