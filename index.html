@@ -114,7 +114,7 @@
                             var foundQuotationBug = false
                             var hasBrackets = false;
                             for(var i2 = 0; i2 < split.length; i2++){
-                                if(split[i2].trim().length > 0 && i2 % 2 == 0 && split[i2].trim() != "{}")){
+                                if(split[i2].trim().length > 0 && i2 % 2 == 0 && split[i2].trim() != "{}"){
                                     text = text + "\nText outside of quotations on line " + (i+1) + " : " + line.trim()
                                     foundQuotationBug = true;
                                     break;
