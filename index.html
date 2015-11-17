@@ -61,6 +61,7 @@
         var waitingOnBracket = false;
         var bracketry = 0;
         var prevLineNo = 1;
+        var hasBeenFirst = false;
         for(var i = 0;i < lines.length;i++){
             if(!(isComment(lines[i]) || isWhitespace(lines[i]))){
                 //Its an actual line of KV code, write accordingly.
@@ -68,11 +69,11 @@
                 //Prep the line for input
                 var line = goodLine(lines[i])
                 
-               // if((bracketry < 0 || (bracketry == 0 && i+1 != lines.length && i != 0)) && line != "{"){
-                //    text = text + "\nFile terminated too early on line " + (i+1) + " : " + line.trim()   
-                //    bracketry = 0;
-                //}
-                
+                if((bracketry < 0 || (bracketry == 0 && hasBeenFirst) && line != "{"){
+                    text = text + "\nFile terminated too early on line " + (i+1) + " : " + line.trim()   
+                    bracketry = 0;
+                }
+                hasBeenFirst = true;
                 //If the previous line only had two quotes, ensure that this line is a bracket
                 if(line == "{}"){
                     if(waitingOnBracket){
