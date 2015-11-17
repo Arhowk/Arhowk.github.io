@@ -43,7 +43,12 @@
     }
     
     var goodLine = function(str){
-        return str.trim();
+        str = str.trim();
+        if(str.indexOf("//") != -1){
+            return str.substring(0, str.indexOf("//"));
+        }else{
+            return str;
+        }
     }
     
     editor.setShowPrintMargin(false);
@@ -66,7 +71,7 @@
                 //If the previous line only had two quotes, ensure that this line is a bracket
                 if(line == "{" || line == "}"){
                     if(waitingOnBracket && line == "}"){
-                        text = text + "\nExpected open block, got close block for line " + (prevLineNo) + " at line " + (i+1) + " : " + lines[i].trim()
+                        text = text + "\nExpected open block, got close block for line " + (prevLineNo) + " at line " + (i+1) + " : " + line.trim()
                     }
                     if(line == "{"){
                         if(!waitingOnBracket){
@@ -78,12 +83,12 @@
                         bracketry--;
                         
                         if(bracketry < 0 || (bracketry == 0 && i+1 != lines.length)){
-                            text = text + "\nFile terminated too early on line " + (i+1) + " : " + lines[i].trim()   
+                            text = text + "\nFile terminated too early on line " + (i+1) + " : " + line.trim()   
                             bracketry = 0;
                         }
                     }
                 }else{
-                    var split = lines[i].split('"')
+                    var split = line.split('"')
                     if(split.length == 3){
                         if(waitingOnBracket){
                             waitingOnBracket = false;   
@@ -91,26 +96,26 @@
                             waitingOnBracket = true;   
                         }
                     }else if(waitingOnBracket){
-                        text = text + "Expected open bracket, got new K/V on line " + (i+1) + " : " + lines[i].trim()
+                        text = text + "Expected open bracket, got new K/V on line " + (i+1) + " : " + line.trim()
                     }else{
                         if(split.length % 2 != 1){
                             console.log("Illegal Number o quotes");
-                            text = text + "\nIncorrect Number of Quotations on line " + (i+1) + " : " + lines[i].trim()
+                            text = text + "\nIncorrect Number of Quotations on line " + (i+1) + " : " + line.trim()
                         }else{
                             //Ensure all text is whtin quotations
                             var foundQuotationBug = false
                             for(var i2 = 0; i2 < split.length; i2++){
                                 if(split[i2].trim().length > 0 && i2 % 2 == 0){
-                                    text = text + "\nText outside of quotations on line " + (i+1) + " : " + lines[i].trim()
+                                    text = text + "\nText outside of quotations on line " + (i+1) + " : " + line.trim()
                                     foundQuotationBug = true;
                                     break;
                                 }
                             }
                             //Throw some parsing error
                             if(split.length > 5 && !foundQuotationBug){
-                                text = text + "\nInterpreter cannot parse more than one KV per line on line " + (i+1) + " : " + lines[i].trim()
+                                text = text + "\nInterpreter cannot parse more than one KV per line on line " + (i+1) + " : " + line.trim()
                             }else if(bracketry == 0 && i != 0){
-                                text = text + "\nText outside of root bracket on line " + (i+1) + " : " + lines[i].trim();
+                                text = text + "\nText outside of root bracket on line " + (i+1) + " : " + line.trim();
                             }
                         }
                     }
