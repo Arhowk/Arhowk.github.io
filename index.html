@@ -45,7 +45,7 @@
     var goodLine = function(str){
         str = str.trim();
         if(str.indexOf("//") != -1){
-            return str.substring(0, str.indexOf("//"));
+            return str.substring(0, str.indexOf("//")).trim();
         }else{
             return str;
         }
