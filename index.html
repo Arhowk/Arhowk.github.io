@@ -108,7 +108,6 @@
                             //text = text + "\ndebug2 " + line 
                             if(split[2].trim().indexOf("{}") == -1){
                                 if(split[0].trim().length != 0 || split[2].trim().length != 0){
-                                text = text + "\ndebug sector 1";
                                     text = text + "\nText outside of quotations on line " + (i+1) + " : " + line.trim()
                                 }
                                 waitingOnBracket = false;   
@@ -118,7 +117,6 @@
                         }else if(split[2].trim().indexOf("{}") == -1){
                            //text = text + "\ndebug3 " + line
                             if(split[0].trim().length != 0 || split[2].trim().length != 0){
-                                        text = text + "\ndebug sector 2"
                                 text = text + "\nText outside of quotations on line " + (i+1) + " : " + line.trim()
                             }
                             waitingOnBracket = true;
@@ -135,10 +133,8 @@
                             var hasBrackets = false;
                             for(var i2 = 0; i2 < split.length; i2++){
                                 if(split[i2].trim().length > 0 && i2 % 2 == 0 && split[i2].trim() != "{}"){
-                                    if((split[i2].trim() == "{" && i2 == 2)|| (split[i2].trim() == "}" && i2 == 4)){
-                                        text = text + "\ndebug" + i2
+                                    if((split[i2].trim() == "{" && i2 == 2)|| (split[i2].trim() == "}" && i2 == 6)){
                                     }else{
-                                        text = text + "\ndebug sector 9 " + i2
                                         text = text + "\nText outside of quotations on line " + (i+1) + " : " + line.trim()
                                         foundQuotationBug = true;
                                         break;
