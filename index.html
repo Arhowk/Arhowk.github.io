@@ -160,7 +160,7 @@
                             }
                             if(hasBrackets && split.length != 3){
                                  text = text + "\nIncorrect Number of Quotations on line " + (i+1) + " : " + line.trim()
-                            }else if(split.length > 5 && !foundQuotationBug && !(hadOpen && hadClose)){
+                            }else if(split.length > 5 && !foundQuotationBug && !(hadOpen && hadClose && split.length == 7)){
                                 text = text + "\nInterpreter cannot parse more than one KV per line on line " + (i+1) + " : " + line.trim()
                             }else if(bracketry == 0 && i != 0){
                                 text = text + "\nText outside of root bracket on line " + (i+1) + " : " + line.trim();
