@@ -131,9 +131,24 @@
                             //Ensure all text is whtin quotations
                             var foundQuotationBug = false
                             var hasBrackets = false;
+                            var hadOpen = false;
+                            var hadClose = false;
                             for(var i2 = 0; i2 < split.length; i2++){
                                 if(split[i2].trim().length > 0 && i2 % 2 == 0 && split[i2].trim() != "{}"){
                                     if((split[i2].trim() == "{" && i2 == 2)|| (split[i2].trim() == "}" && i2 == 6)){
+                                        if(split[i2].trim() == "{"){
+                                            if(hadOpen){
+                                                text = text + "\nUnknown error occurred on line " + (i+1) + " : " + line.trim()
+                                            }else{
+                                                hadOpen = true;
+                                            }
+                                        }else{
+                                            if(hadClose){
+                                                text = text + "\nUnknown error occurred on line " + (i+1) + " : " + line.trim()
+                                            }else{
+                                                hadClose = true;
+                                            }
+                                        }
                                     }else{
                                         text = text + "\nText outside of quotations on line " + (i+1) + " : " + line.trim()
                                         foundQuotationBug = true;
@@ -145,7 +160,7 @@
                             }
                             if(hasBrackets && split.length != 3){
                                  text = text + "\nIncorrect Number of Quotations on line " + (i+1) + " : " + line.trim()
-                            }else if(split.length > 5 && !foundQuotationBug){
+                            }else if(split.length > 5 && !foundQuotationBug && !(hadOpen && hadClose)){
                                 text = text + "\nInterpreter cannot parse more than one KV per line on line " + (i+1) + " : " + line.trim()
                             }else if(bracketry == 0 && i != 0){
                                 text = text + "\nText outside of root bracket on line " + (i+1) + " : " + line.trim();
