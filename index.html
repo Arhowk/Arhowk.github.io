@@ -177,7 +177,8 @@
             text = text + "\nUnexpected: End of File (missing " + bracketry + " closing bracket" + (bracketry == 1 ? "" : "s") + ")";   
         }
         if(text == ""){
-            editor2.setValue(editor.getValue());
+            //editor2.setValue(editor.getValue());
+            editor2.setValue("Your KV text (should be) completely fine!");
         }else{
             editor2.setValue(text.trim());
         }
