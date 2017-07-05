@@ -127,6 +127,10 @@
                     }else{
                         if(split.length % 2 != 1){
                             text = text + "\nIncorrect Number of Quotations on line " + (i+1) + " : " + line.trim()
+                            if(split.indexOf("\\") != -1)
+                            {
+                                text = text + "\n    Note- escaped character detected. The parser does not support escaped quotes.";   
+                            }
                         }else{
                             //Ensure all text is whtin quotations
                             var foundQuotationBug = false
