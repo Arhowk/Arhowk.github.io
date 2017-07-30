@@ -55,6 +55,8 @@
     editor2.setShowPrintMargin(false);
     editor.getSession().on('change', function() {   
         var textToProcess = editor.getValue();
+        textToProcess = textToProcess.replace("\\\"", "");
+        textToProcess = textToProcess.replace("\\'", "");
         var lines = textToProcess.split('\n');
         var hasErrors = false;
         var text = "";
