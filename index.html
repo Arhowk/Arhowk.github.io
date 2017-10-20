@@ -118,10 +118,15 @@
                             }
                         }else if(split[2].trim().indexOf("{}") == -1){
                            //text = text + "\ndebug3 " + line
-                            if(split[0].trim().length != 0 || split[2].trim().length != 0){
+                            if(split[2].trim().equals("{"))
+                            {
+                                bracketry++;
+                            }else if(split[0].trim().length != 0 || split[2].trim().length != 0){
                                 text = text + "\nText outside of quotations on line " + (i+1) + " : " + line.trim()
-                            }
-                            waitingOnBracket = true;
+                                waitingOnBracket = true
+                            }else{
+                                waitingOnBracket = true
+                            };
                         }
                        // text = text + "\ndebug " + split[2] + " " + split[2].trim().indexOf("{}") + " " + waitingOnBracket;
                     }else if(waitingOnBracket){
