@@ -73,7 +73,7 @@
                 var line = goodLine(lines[i])
                 
                 if(!(line.split(' ')[0].trim() == "#base") && ((bracketry < 0 || (bracketry == 0 && hasBeenFirst)) && (line != "{")) || (bracketry == 0 && line == "{" && hasBeenFirstEntry)){
-                    if(line.split(' ')[1].trim() != "{")
+                    if(!line.split(' ')[1] || line.split(' ')[1].trim() != "{")
                     {
                          text = text + "\nFile terminated too early on line " + (i+1) + " : " + line.trim()   
                     }
