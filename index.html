@@ -81,7 +81,10 @@
                 }
                 hasBeenFirst = true;
                 //If the previous line only had two quotes, ensure that this line is a bracket
-                if(line == "{}"){
+                if(line.split(' ')[0].trim() == "#base")
+                {
+
+                }else if(line == "{}"){
                     if(waitingOnBracket){
                         waitingOnBracket = false;   
                     }
