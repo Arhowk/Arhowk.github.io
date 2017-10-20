@@ -79,7 +79,7 @@
                     }
                     bracketry = 0;
                 }
-                if(line == "{" || line.split(' ')[1].trim() == "{"){
+                if(line == "{" || (line.split(' ')[1] && line.split(' ')[1].trim() == "{")){
                     hasBeenFirstEntry = true;
                 }
                 hasBeenFirst = true;
